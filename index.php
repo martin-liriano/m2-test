@@ -1,4 +1,3 @@
 <?
-	$version = "0.0.0";
-	$testLine = "Hello World!"
+	define('PREFIX_SOFTWARE_VERSION', '0.0.0');
 ?>
