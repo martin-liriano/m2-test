@@ -1,0 +1,9 @@
+name: M2 Test Action
+
+on:
+  push:
+    banches:
+      - main
+      
+jobs:
+  create-release:
