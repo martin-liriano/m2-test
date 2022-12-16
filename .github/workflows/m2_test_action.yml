@@ -2,13 +2,13 @@ name: M2 Test Action
 
 on:
   push:
-    banches:
+    branches:
       - main
       
 jobs:
   build:
-    - name: create tag
-    uses: actions/github-script@v5
+    name: create tag
+    uses: actions/github-script@v6
     with:
       script: |
         github.rest.git.createRef({
