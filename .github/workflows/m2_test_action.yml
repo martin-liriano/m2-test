@@ -7,13 +7,24 @@ jobs:
     name: create tag
     runs-on: ubuntu-latest
     steps:
+     - name: Set Tag Output
+       id: set-tag
+       run: echo "::set-output name=tag_name::$(sh get-version.sh)"
      - name: Create tag
+       id: create-tag
        uses: actions/github-script@v6
        with: 
         script: |
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: 'refs/tags/0.0.0',
+            ref: 'refs/tags/${{ steps.set-tag.outputs.tag_name }}',
             sha: context.sha
           })
+     - name: Create release
+       id: set-release
+       uses: ncipollo/release-action@v1
+       with:  
+        tag: ${{ steps.set-tag.outputs.tag_name }}
+
+        
