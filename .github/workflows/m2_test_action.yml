@@ -18,7 +18,7 @@ jobs:
           github.rest.git.createRef({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            ref: "refs/tags/${{ steps.set-tag.outputs.tag_name }}",
+            ref: "refs/tags/0test",
             sha: context.sha
           })
      - name: Create release
