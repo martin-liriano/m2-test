@@ -8,12 +8,15 @@ on:
 jobs:
   build:
     name: create tag
-    uses: actions/github-script@v6
-    with:
-      script: |
-        github.rest.git.createRef({
-          owner: context.repo.owner,
-          repo: context.repo.repo,
-          ref: 'refs/tags/0.0.0',
-          sha: context.sha
-        })
+    runs-on: ubuntu-latest
+    steps:
+     - name: Create tag
+       uses: actions/github-script@v6
+       with: 
+        script: |
+          github.rest.git.createRef({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            ref: 'refs/tags/0.0.0',
+            sha: context.sha
+          })
