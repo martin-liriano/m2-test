@@ -1,21 +1,26 @@
 import re
 
-# Using readlines()
-file1 = open('index.php', 'r')
+file1 = open('version.txt', 'r')
 Lines = file1.readlines()
 
-p = re.compile('[0-9]+\.[0-9]+\.[0-9]+)
+stableRegex = re.compile('[0-9]+\.[0-9]+\.')
+updateRegex = re.compile('[0-9]+$')
+
+versionUpdate = ''
+versionStable = ''
   
 for line in Lines:
-  if 'PREFIX_SOFTWARE_VERSION' in line:
-    result = p.search(line)
-    countPeriod = 2
-    appendedString = ''
-    for c in result:
-      if c is '.':
-        countPeriod = countPeriod - 1
-      if countPeriod == 0:
-        appendedString += c
-               
-     appendedString = int(appendedString)
-     appendedString = appendedString + 1
+    print(line)
+    versionUpdate = updateRegex.search(line).group()
+    versionStable = stableRegex.search(line).group()
+                    
+versionUpdate = int(versionUpdate)
+versionUpdate = versionUpdate + 1
+
+version = versionStable + str(versionUpdate)
+
+file2 = open('version.txt', 'w')
+
+file2.write(version)
+
+file2.close()
