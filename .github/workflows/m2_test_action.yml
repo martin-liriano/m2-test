@@ -9,7 +9,7 @@ jobs:
     steps:
      - name: Set Tag Output
        id: set-tag
-       run: echo "::set-output name=tag_name::$(sh get-version.sh)"
+       run: echo "::set-output name=tag_name::$(sh ./get-version.sh)"
      - name: Create tag
        id: create-tag
        uses: actions/github-script@v6
