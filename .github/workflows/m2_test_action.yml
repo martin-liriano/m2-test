@@ -40,8 +40,6 @@ jobs:
        run: |
          touch version.txt
          echo ${{ steps.set-tag.outputs.tag_name }} >> version.txt
-         echo "cat version.txt"
-         cat version.txt
      - name: Create release
        id: set-release
        uses: ncipollo/release-action@v1
