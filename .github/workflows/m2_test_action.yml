@@ -35,11 +35,14 @@ jobs:
             ref: "refs/tags/${{ steps.set-tag.outputs.tag_name }}",
             sha: context.sha
           })
-     - name: Write release to file
-       id: write-release
+     - name: Push release files
+       id: push-release-file
        run: |
-         touch version.txt
-         echo ${{ steps.set-tag.outputs.tag_name }} >> version.txt
+          git config --global user.name "test deployer"
+          git config --global user.email "martin.liriano@extend.com"
+          git add version.txt
+          git commit -m "version update deployment ${{ steps.set-tag.outputs.tag_name }}"
+          git push
      - name: Create release
        id: set-release
        uses: ncipollo/release-action@v1
