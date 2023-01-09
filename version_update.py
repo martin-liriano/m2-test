@@ -13,23 +13,19 @@ filename = 'version.txt'
 # updateMajorVersion(Lines) updates the Major version x.0.0
 def updateMajorVersion(Lines) :
 
-    stableRegexString = '\.[0-9]+\.[0-9]+$'
     updateRegexString = '^[0-9]+'
 
-    stableRegex = re.compile(stableRegexString)
     updateRegex = re.compile(updateRegexString)
 
     versionUpdate = ''
-    versionStable = ''
 
     for line in Lines:
         versionUpdate = updateRegex.search(line).group()
-        versionStable = stableRegex.search(line).group()
                     
     versionUpdate = int(versionUpdate)
     versionUpdate = versionUpdate + 1
 
-    version = str(versionUpdate) + versionStable
+    version = str(versionUpdate) + '.0.0'
     return version
 
 # updateMinorVersion(Lines) updates the minor version 0.x.0
