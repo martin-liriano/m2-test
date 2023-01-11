@@ -1,10 +1,12 @@
 # Test Changelog
 
-## version: 5.0.0
+## version: 5.0.1
 
 ### Changelog:
 
 ---
+
+5.0.1 - patch release - updated martin to JM
 
 5.0.0 - major release - magento upgrade
 
