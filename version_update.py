@@ -4,11 +4,18 @@ import re, sys
 # 0 is Major
 # 1 is Minor
 # 2 is Patch
-typeOfUpgrade = int(sys.argv[1])
+type_of_upgrade = int(sys.argv[1])
 
-# filename dictates where the version file is located that serves as
+# fetch commit message from bash arguments
+change_log_update = str(sys.argv[2])
+
+
+# version_file_name dictates where the version file is located that serves as
 # placeholder for all versioning
-filename = 'version.txt'
+version_file_name = 'version.txt'
+
+# changelog_file_name dictates where the changelog file is located
+changelog_file_name = 'changelog.md'
 
 # updateMajorVersion(Lines) updates the Major version x.0.0
 def updateMajorVersion(Lines) :
@@ -18,6 +25,7 @@ def updateMajorVersion(Lines) :
     updateRegex = re.compile(updateRegexString)
 
     versionUpdate = ''
+    versionStable = ''
 
     for line in Lines:
         versionUpdate = updateRegex.search(line).group()
@@ -79,35 +87,68 @@ def updatePatchVersion(Lines) :
     version = versionStable + str(versionUpdate)
     return version
 
+# updateChangelog(version, lines) updates the changelog with latest commits and some proper formatting
+def updateChangelog(version, lines):
+    versionCommit = version + ' - ' + change_log_update
+    updatedLines = ''
+    lines[2] = '## version: ' + version + '\n'
+    linesPart1 = lines[:8]
+    linesPart2 = lines[8:]
+    print(type_of_upgrade)
+    if (type_of_upgrade == 0) :
+        linesPart1.append(versionCommit)
+        linesPart1.append('\n')
+        linesPart1.append('\n')
+        linesPart1.append('---')
+        linesPart1.append('\n')
+        linesPart1.append('\n')
+        updatedLines = linesPart1 + linesPart2
+    else :
+        linesPart1.append(versionCommit)
+        linesPart1.append('\n')
+        linesPart1.append('\n')
+        updatedLines = linesPart1 + linesPart2
+    
+    return updatedLines
+
 # writeToFile(version) takes in version from update functions and writes it to the version file
-def writeToFile(version) :
-
-    file2 = open('version.txt', 'w')
-
-    file2.write(version)
-
-    file2.close()
+def writeToFile(contents, filename) :
+    file1 = open(filename, 'w')
+    file1.writelines(contents)
+    file1.close()
 
 # readFile() reads file for use on update functions
-def readFile() :
-    file1 = open('version.txt', 'r')
+def readFile(filename) :
+    file1 = open(filename, 'r')
     Lines = file1.readlines()
+    file1.close()
     return Lines
 
 
-# Extecution steps for above functionality - Steps below
+# Extecution steps for updating version functionality - Steps below
 # 1. Read the file and get acquire the lines
 # 2. Determine type of upgrade that needs to be procesed
 # 3. Process the versioning update
 # 4. Write the update to the file
 
-linesToRead = readFile()
+version_file_lines = readFile(version_file_name)
 
-if typeOfUpgrade == 0 :
-    versionToWrite = updateMajorVersion(linesToRead)
-elif typeOfUpgrade == 1 :
-    versionToWrite = updateMinorVersion(linesToRead)
-elif typeOfUpgrade == 2 :
-    versionToWrite = updatePatchVersion(linesToRead)
+if type_of_upgrade == 0 :
+    version_to_write = updateMajorVersion(version_file_lines)
+elif type_of_upgrade == 1 :
+    version_to_write = updateMinorVersion(version_file_lines)
+elif type_of_upgrade == 2 :
+    version_to_write = updatePatchVersion(version_file_lines)
 
-writeToFile(versionToWrite)
+writeToFile(version_to_write, version_file_name)
+
+# Extecution steps for updating changelog functionality - Steps below
+# 1. Read the file and get acquire the lines
+# 2. Update the changelog with the proper formatting
+# 4. Write the update to the changelog file
+
+changelog_file_lines = readFile(changelog_file_name)
+
+updated_changelog_file_lines = updateChangelog(version_to_write, changelog_file_lines)
+
+writeToFile(updated_changelog_file_lines, changelog_file_name)
