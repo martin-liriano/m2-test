@@ -1,8 +1,12 @@
 # Test Changelog
 
-## version: 3.1.0
+## version: 4.0.0
 
 ### Changelog:
+
+---
+
+4.0.0 - major release - changed hello world to martin
 
 ---
 
