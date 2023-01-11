@@ -1,8 +1,12 @@
 # Test Changelog
 
-## version: 4.0.0
+## version: 5.0.0
 
 ### Changelog:
+
+---
+
+5.0.0 - major release - magento upgrade
 
 ---
 
