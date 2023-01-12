@@ -1,10 +1,12 @@
 # Test Changelog
 
-## version: 5.0.1
+## version: 5.1.1
 
 ### Changelog:
 
 ---
+
+5.1.1 - minor release - updating JM to Cody
 
 5.0.1 - patch release - updated martin to JM
 
