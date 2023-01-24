@@ -1,8 +1,12 @@
 # Test Changelog
 
-## version: 5.1.1
+## version: 6.0.0
 
 ### Changelog:
+
+---
+
+6.0.0 - major release - updating text to luke
 
 ---
 
