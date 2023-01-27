@@ -1,10 +1,12 @@
 # Test Changelog
 
-## version: 6.1.0
+## version: 6.2.0
 
 ### Changelog:
 
 ---
+
+6.2.0 - minor release - updated a couple things
 
 6.1.0 - minor release - updated hello world
 
