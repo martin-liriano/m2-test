@@ -1,10 +1,12 @@
 # Test Changelog
 
-## version: 6.0.0
+## version: 6.1.0
 
 ### Changelog:
 
 ---
+
+6.1.0 - minor release - updated hello world
 
 6.0.0 - major release - updating text to luke
 
