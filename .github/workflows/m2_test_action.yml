@@ -4,14 +4,6 @@ on:
    push:
       branches:
             - master
-            
-env:
-   USERNAME: 'extend-deployer'
-   USEREMAIL: "martin.liriano@extend.com"
-   MAJOR_RELEASE: 'major release'
-   MINOR_RELEASE: 'minor release'
-   PATCH_RELEASE: 'patch release'
-
       
 jobs:
   create-release:
@@ -25,13 +17,13 @@ jobs:
        with:
             pthon-version: '3.9'
      - name: update major version file
-       if: contains( github.event.head_commit.message, $MAJOR_RELEASE)
+       if: contains( github.event.head_commit.message, 'major release')
        run: python version_update.py 0 "${{github.event.head_commit.message}}"
      - name: update minor version file
-       if: contains( github.event.head_commit.message, $MINOR_RELEASE)
+       if: contains( github.event.head_commit.message, 'minor release')
        run: python version_update.py 1 "${{github.event.head_commit.message}}"
      - name: update patch version file
-       if: contains( github.event.head_commit.message, $PATCH_RELEASE)
+       if: contains( github.event.head_commit.message,'patch release')
        run: python version_update.py 2 "${{github.event.head_commit.message}}"
      - name: Set Tag Output
        id: set-tag
@@ -50,8 +42,8 @@ jobs:
      - name: Push release files
        id: push-release-file
        run: |
-          git config --global user.name $USERNAME
-          git config --global user.email $USEREMAIL
+          git config --global user.name 'extend-deployer'
+          git config --global user.email "martin.liriano@extend.com"
           git add version.txt changelog.md
           git commit -m "version update deployment ${{ steps.set-tag.outputs.tag_name }}"
           git push
