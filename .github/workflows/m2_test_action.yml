@@ -1,6 +1,9 @@
 name: M2 Test Action
 
-on: push
+on: 
+   push:
+      branches:
+            - master
       
 jobs:
   create-release:
