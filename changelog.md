@@ -1,10 +1,14 @@
 # Test Changelog
 
-## version: 6.2.0
+## version: 6.3.0
 
 ### Changelog:
 
 ---
+
+6.3.0 - Merge pull request #2 from martin-liriano/test-branch
+
+minor release - updated test
 
 6.2.0 - minor release - updated a couple things
 
