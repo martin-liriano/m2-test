@@ -16,7 +16,7 @@ env:
       
 jobs:
   create-release:
-    if: $RUN_UPDATE == 'true'
+    if: ${{$RUN_UPDATE == 'true'}}
     runs-on: ubuntu-latest
     steps:     
      - name: Checkout Code
