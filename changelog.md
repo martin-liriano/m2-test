@@ -1,10 +1,14 @@
 # Test Changelog
 
-## version: 0.1.0
+## version: 1.0.0
 
 
 
 ### Changelog:
+
+1.0.0 - major release - updated index.html 08
+
+---
 
 ---
 0.1.0
