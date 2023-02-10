@@ -1,13 +1,14 @@
 name: M2 Test Action
 
-on: 
-   push:
-      branches:
-            - master
+on:  
+  push:
+  pull_request:
+    branches:
+      - master
       
 jobs:
   create-release:
-    if: (contains( github.event.head_commit.message, 'major release') || contains( github.event.head_commit.message,'minor release') || contains( github.event.head_commit.message, 'patch release')) && (github.event_name == 'pull_request') 
+    if: (contains( github.event.head_commit.message, 'major release') || contains( github.event.head_commit.message,'minor release') || contains( github.event.head_commit.message, 'patch release'))
     runs-on: ubuntu-latest
     steps:     
      - name: Checkout Code
