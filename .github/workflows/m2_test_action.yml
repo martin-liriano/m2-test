@@ -7,7 +7,7 @@ on:
       
 jobs:
   create-release:
-    if: contains( github.event.head_commit.message, 'major release') || contains( github.event.head_commit.message,'minor release') || contains( github.event.head_commit.message, 'patch release') && (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true)
+    if: (contains( github.event.head_commit.message, 'major release') || contains( github.event.head_commit.message,'minor release') || contains( github.event.head_commit.message, 'patch release')) && (github.event_name == 'pull_request' && github.event.action == 'closed' && github.event.pull_request.merged == true)
     runs-on: ubuntu-latest
     steps:     
      - name: Checkout Code
