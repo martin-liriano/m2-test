@@ -1,10 +1,14 @@
 # Test Changelog
 
-## version: 1.0.0
+## version: 1.0.1
 
 
 
 ### Changelog:
+
+1.0.1 - patch release - Merge pull request #20 from martin-liriano/extend-test
+
+Update index.html
 
 1.0.0 - major release - updated index.html 08
 
