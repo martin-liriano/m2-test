@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 # 0 is Major
 # 1 is Minor
 # 2 is Patch
-type_of_upgrade = sys.argv[1]
+type_of_upgrade = str(sys.argv[1])
 
 # fetch commit message from bash arguments
 change_log_update = str(sys.argv[2])
