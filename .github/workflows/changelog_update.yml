@@ -1,10 +1,10 @@
 
 name: M2 Test Action
 
-on:  
+on:
   push:
-    branches:
-      - '!master'
+    branches-ignore:
+      - master
       
 jobs:
   create-release:
