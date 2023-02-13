@@ -183,6 +183,7 @@ else :
     # 2. Read the branch changelog file
     # 3. Update the changelog with the proper formatting
     # 4. Write the update to the changelog file
+    # 5. Clear the branch changelog file
 
     changelog_file_lines = readFile(changelog_file_name)
 
@@ -191,3 +192,5 @@ else :
     updated_changelog_file_lines = updateChangelog(version_to_write, branch_changelog_lines, changelog_file_lines)
 
     writeToFile(updated_changelog_file_lines, changelog_file_name)
+
+    writeToFile([], branch_changelog_file_name)
