@@ -5,7 +5,7 @@ import xml.etree.ElementTree as ET
 # 0 is Major
 # 1 is Minor
 # 2 is Patch
-type_of_upgrade = int(sys.argv[1])
+type_of_upgrade = sys.argv[1]
 
 # fetch commit message from bash arguments
 change_log_update = str(sys.argv[2])
@@ -99,7 +99,9 @@ def updateChangelog(version, new_lines, changelog_lines):
     lines_part2 = changelog_lines[8:]
     updatedLines = ''
 
-    if (type_of_upgrade == '0') :
+    type_of_upgrade = int(type_of_upgrade)
+
+    if (type_of_upgrade == 0) :
         new_lines = '\n\n**' + version + '**\n' + new_lines
         lines_part1.append(new_lines)
         lines_part1.append('\n')
@@ -168,6 +170,8 @@ else :
     # 3. Process the versioning update
     # 4. Write the update to the file
     version_file_lines = readFile(version_file_name)
+
+    type_of_upgrade = int(type_of_upgrade)
 
     if type_of_upgrade == 0 :
         version_to_write = updateMajorVersion(version_file_lines)
