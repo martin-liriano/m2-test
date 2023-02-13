@@ -1,4 +1,5 @@
 import re, sys
+import xml.etree.ElementTree as ET
 
 # fetch type of upgrade code from bash arguments
 # 0 is Major
@@ -16,6 +17,12 @@ version_file_name = 'version.txt'
 
 # changelog_file_name dictates where the changelog file is located
 changelog_file_name = 'changelog.md'
+
+# changelog_file_name dictates where the changelog file is located
+branch_changelog_file_name = 'branch_changelog.md'
+
+# xml_file_name dictates where XML file is located
+xml_file_name = './etc/config.xml'
 
 # updateMajorVersion(Lines) updates the Major version x.0.0
 def updateMajorVersion(Lines) :
@@ -70,9 +77,7 @@ def updatePatchVersion(Lines) :
     updateRegexString = '[0-9]+$'
 
     stableRegex = re.compile(stableRegexString)
-    print('stableRegex', stableRegex)
     updateRegex = re.compile(updateRegexString)
-    print('updateRegex', updateRegex)
 
     versionUpdate = ''
     versionStable = ''
@@ -88,28 +93,49 @@ def updatePatchVersion(Lines) :
     return version
 
 # updateChangelog(version, lines) updates the changelog with latest commits and some proper formatting
-def updateChangelog(version, lines):
-    versionCommit = version + ' - ' + change_log_update
+def updateChangelog(version, new_lines, changelog_lines):
+    changelog_lines[2] = '## version: ' + version + '\n'
+    lines_part1 = changelog_lines[:8]
+    lines_part2 = changelog_lines[8:]
     updatedLines = ''
-    lines[2] = '## version: ' + version + '\n'
-    linesPart1 = lines[:8]
-    linesPart2 = lines[8:]
-    print(type_of_upgrade)
-    if (type_of_upgrade == 0) :
-        linesPart1.append(versionCommit)
-        linesPart1.append('\n')
-        linesPart1.append('\n')
-        linesPart1.append('---')
-        linesPart1.append('\n')
-        linesPart1.append('\n')
-        updatedLines = linesPart1 + linesPart2
+
+    if (type_of_upgrade == '0') :
+        new_lines = '\n\n**' + version + '**\n' + new_lines
+        lines_part1.append(new_lines)
+        lines_part1.append('\n')
+        lines_part1.append('---')
+        lines_part1.append('\n')
     else :
-        linesPart1.append(versionCommit)
-        linesPart1.append('\n')
-        linesPart1.append('\n')
-        updatedLines = linesPart1 + linesPart2
+        lines_part1[7] = '\n\n**' + version + '**\n'
+        lines_part1.append(new_lines)
+        lines_part1.append('\n')
+
+    updatedLines = lines_part1 + lines_part2
     
     return updatedLines
+
+# update_branch_changelog(new_lines) updates the branch changelog changelog with latest commits and some formatting
+def update_branch_changelog(new_lines, change_log_update) :
+    if not new_lines :
+        new_lines = [] 
+    lines = []
+    lines.append('\n')
+    lines.append(change_log_update)
+    lines.append('\n')
+    return new_lines + lines
+
+# processXML(versiion) takes version input and writes to the config.xml
+def processXML(version):
+    # read XML file and set root to root variable
+    tree = ET.parse(xml_file_name)
+    root = tree.getroot()
+
+    # find version tag and set the version to proper version
+    for version in root.iter('tag'):
+        version.text = version
+
+    # write data back to file
+    tree.write('./etc/config.xml')
 
 # writeToFile(version) takes in version from update functions and writes it to the version file
 def writeToFile(contents, filename) :
@@ -124,31 +150,44 @@ def readFile(filename) :
     file1.close()
     return Lines
 
+# Execution steps for updating branch specific changelog - Steps below
+# 1. if type_of_upgrade is 'branch' we will:
+# 2. Read the file and acquire lines from branch_changelog.md
+# 3. Append the commit messages into branch changelog
 
-# Extecution steps for updating version functionality - Steps below
-# 1. Read the file and get acquire the lines
-# 2. Determine type of upgrade that needs to be procesed
-# 3. Process the versioning update
-# 4. Write the update to the file
+if (type_of_upgrade == 'branch') :
+    new_lines = readFile(branch_changelog_file_name)
+    new_lines = update_branch_changelog(new_lines, change_log_update)
+    writeToFile(new_lines, branch_changelog_file_name)
 
-version_file_lines = readFile(version_file_name)
+else :
 
-if type_of_upgrade == 0 :
-    version_to_write = updateMajorVersion(version_file_lines)
-elif type_of_upgrade == 1 :
-    version_to_write = updateMinorVersion(version_file_lines)
-elif type_of_upgrade == 2 :
-    version_to_write = updatePatchVersion(version_file_lines)
+    # Execution steps for updating version functionality - Steps below
+    # 1. Read the file and acquire the lines
+    # 2. Determine type of upgrade that needs to be procesed
+    # 3. Process the versioning update
+    # 4. Write the update to the file
+    version_file_lines = readFile(version_file_name)
 
-writeToFile(version_to_write, version_file_name)
+    if type_of_upgrade == 0 :
+        version_to_write = updateMajorVersion(version_file_lines)
+    elif type_of_upgrade == 1 :
+        version_to_write = updateMinorVersion(version_file_lines)
+    elif type_of_upgrade == 2 :
+        version_to_write = updatePatchVersion(version_file_lines)
 
-# Extecution steps for updating changelog functionality - Steps below
-# 1. Read the file and get acquire the lines
-# 2. Update the changelog with the proper formatting
-# 4. Write the update to the changelog file
+    writeToFile(version_to_write, version_file_name)
 
-changelog_file_lines = readFile(changelog_file_name)
+    # Extecution steps for updating changelog functionality - Steps below
+    # 1. Read the master changelog file and acquire the lines
+    # 2. Read the branch changelog file
+    # 3. Update the changelog with the proper formatting
+    # 4. Write the update to the changelog file
 
-updated_changelog_file_lines = updateChangelog(version_to_write, changelog_file_lines)
+    changelog_file_lines = readFile(changelog_file_name)
 
-writeToFile(updated_changelog_file_lines, changelog_file_name)
+    branch_changelog_lines = readFile(branch_changelog_file_name)
+
+    updated_changelog_file_lines = updateChangelog(version_to_write, branch_changelog_lines, changelog_file_lines)
+
+    writeToFile(updated_changelog_file_lines, changelog_file_name)
