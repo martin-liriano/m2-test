@@ -4,7 +4,7 @@ name: M2 Test Action
 on:
   push:
     branches-ignore:
-      - master
+      - 'master'
       
 jobs:
   create-release:
