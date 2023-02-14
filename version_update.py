@@ -93,7 +93,7 @@ def updatePatchVersion(Lines) :
     return version
 
 # updateChangelog(version, lines) updates the changelog with latest commits and some proper formatting
-def updateChangelog(version, new_lines, changelog_lines):
+def updateChangelog(version, new_lines, changelog_lines, type_of_upgrade):
     changelog_lines[2] = '## version: ' + version + '\n'
     lines_part1 = changelog_lines[:8]
     lines_part2 = changelog_lines[8:]
@@ -193,7 +193,7 @@ else :
 
     branch_changelog_lines = readFile(branch_changelog_file_name)
 
-    updated_changelog_file_lines = updateChangelog(version_to_write, branch_changelog_lines, changelog_file_lines)
+    updated_changelog_file_lines = updateChangelog(version_to_write, branch_changelog_lines, changelog_file_lines, type_of_upgrade)
 
     writeToFile(updated_changelog_file_lines, changelog_file_name)
 
