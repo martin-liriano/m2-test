@@ -115,7 +115,7 @@ def updateChangelog(version, new_lines, changelog_lines, type_of_upgrade):
 
     updatedLines = lines_part1 + lines_part2
     
-    return str(updatedLines)
+    return ''.join(updatedLines)
 
 # update_branch_changelog(new_lines) updates the branch changelog changelog with latest commits and some formatting
 def update_branch_changelog(new_lines, change_log_update) :
