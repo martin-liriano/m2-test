@@ -19,7 +19,7 @@ version_file_name = 'version.txt'
 changelog_file_name = 'changelog.md'
 
 # changelog_file_name dictates where the changelog file is located
-branch_changelog_file_name = './.github/branch_changelog.md'
+branch_changelog_file_name = 'old_changelog.md'
 
 # xml_file_name dictates where XML file is located
 xml_file_name = './etc/config.xml'
@@ -95,27 +95,39 @@ def updatePatchVersion(Lines) :
 # updateChangelog(version, lines) updates the changelog with latest commits and some proper formatting
 def updateChangelog(version, new_lines, changelog_lines, type_of_upgrade):
     changelog_lines[2] = '## version: ' + version + '\n'
-    lines_part1 = changelog_lines[:8]
-    lines_part2 = changelog_lines[8:]
+
+    version_split1 = changelog_lines[:7]
+    version_split2 = changelog_lines[7:]
+    version_line = '**' + version + '**'
+    version_split1.append('\n')
+    version_split1.append('\n')
+    version_split1.append(version_line)
+    version_split1.append('\n')
+    version_split1.append('\n')
+
+    changelog_lines = version_split1 + version_split2
+
+    lines_part1 = changelog_lines[:12]
+    lines_part2 = changelog_lines[12:]
+
     updatedLines = ''
+    new_lines.append('\n')
+    new_lines = ''.join(new_lines)
 
     type_of_upgrade = int(type_of_upgrade)
 
     if (type_of_upgrade == 0) :
-        version_line = '\n\n**' + version + '**\n'
-        new_lines.append(version_line)
         lines_part1.append(new_lines)
         lines_part1.append('\n')
         lines_part1.append('---')
         lines_part1.append('\n')
     else :
-        lines_part1[7] = '\n\n**' + version + '**\n'
         lines_part1.append(new_lines)
         lines_part1.append('\n')
 
     updatedLines = lines_part1 + lines_part2
     
-    return ''.join(updatedLines)
+    return updatedLines
 
 # update_branch_changelog(new_lines) updates the branch changelog changelog with latest commits and some formatting
 def update_branch_changelog(new_lines, change_log_update) :
@@ -123,6 +135,9 @@ def update_branch_changelog(new_lines, change_log_update) :
     if not new_lines :
         new_lines = []
         new_lines.append('\n')
+    else :
+        new_lines.insert(0, '\n')
+        
     lines.append(change_log_update)
     lines.append('\n')
     return lines + new_lines
@@ -198,4 +213,4 @@ else :
 
     writeToFile(updated_changelog_file_lines, changelog_file_name)
 
-    writeToFile([], branch_changelog_file_name)
+#    writeToFile([], branch_changelog_file_name)
