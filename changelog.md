@@ -1,1 +1,7 @@
-['# Test Changelog\n', '\n', '## version: 1.0.0\n', '\n', '### Changelog:\n', '\n', '---\n', ['test update 01-03\n', 'test index.html 01-02\n', 'Update version_update.py\n', '\n', '\n\n**1.0.0**\n'], '\n', '---', '\n']
+# Test Changelog
+
+## version: 0.0.0
+
+### Changelog:
+
+---
