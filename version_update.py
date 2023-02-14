@@ -115,7 +115,7 @@ def updateChangelog(version, new_lines, changelog_lines, type_of_upgrade):
 
     updatedLines = lines_part1 + lines_part2
     
-    return updatedLines
+    return str(updatedLines)
 
 # update_branch_changelog(new_lines) updates the branch changelog changelog with latest commits and some formatting
 def update_branch_changelog(new_lines, change_log_update) :
@@ -126,7 +126,7 @@ def update_branch_changelog(new_lines, change_log_update) :
         lines.append('\n')
     lines.append(change_log_update)
     lines.append('\n')
-    return new_lines + lines
+    return lines + new_lines
 
 # processXML(versiion) takes version input and writes to the config.xml
 def processXML(version):
