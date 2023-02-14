@@ -122,8 +122,7 @@ def update_branch_changelog(new_lines, change_log_update) :
     lines = []
     if not new_lines :
         new_lines = []
-    else :
-        lines.append('\n')
+        new_lines.append('\n')
     lines.append(change_log_update)
     lines.append('\n')
     return lines + new_lines
