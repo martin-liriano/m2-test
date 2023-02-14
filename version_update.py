@@ -102,7 +102,8 @@ def updateChangelog(version, new_lines, changelog_lines, type_of_upgrade):
     type_of_upgrade = int(type_of_upgrade)
 
     if (type_of_upgrade == 0) :
-        new_lines = '\n\n**' + version + '**\n' + new_lines
+        version_line = '\n\n**' + version + '**\n'
+        new_lines.append(version_line)
         lines_part1.append(new_lines)
         lines_part1.append('\n')
         lines_part1.append('---')
