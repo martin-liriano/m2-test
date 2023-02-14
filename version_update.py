@@ -19,7 +19,7 @@ version_file_name = 'version.txt'
 changelog_file_name = 'changelog.md'
 
 # changelog_file_name dictates where the changelog file is located
-branch_changelog_file_name = 'old_changelog.md'
+branch_changelog_file_name = './.github/branch_changelog.md'
 
 # xml_file_name dictates where XML file is located
 xml_file_name = './etc/config.xml'
