@@ -119,10 +119,11 @@ def updateChangelog(version, new_lines, changelog_lines, type_of_upgrade):
 
 # update_branch_changelog(new_lines) updates the branch changelog changelog with latest commits and some formatting
 def update_branch_changelog(new_lines, change_log_update) :
-    if not new_lines :
-        new_lines = [] 
     lines = []
-    lines.append('\n')
+    if not new_lines :
+        new_lines = []
+    else :
+        lines.append('\n')
     lines.append(change_log_update)
     lines.append('\n')
     return new_lines + lines
