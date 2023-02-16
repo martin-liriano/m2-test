@@ -213,4 +213,4 @@ else :
 
     writeToFile(updated_changelog_file_lines, changelog_file_name)
 
-#    writeToFile([], branch_changelog_file_name)
+    writeToFile([], branch_changelog_file_name)
