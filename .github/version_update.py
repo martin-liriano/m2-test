@@ -182,12 +182,18 @@ else :
 
     # Execution steps for updating version functionality - Steps below
     # 1. Read the file and acquire the lines
-    # 2. Determine type of upgrade that needs to be procesed
-    # 3. Process the versioning update
-    # 4. Write the update to the file
+    # 2. Insert merge commit message
+    # 3. Determine type of upgrade that needs to be procesed
+    # 4. Process the versioning update
+    # 5. Write the update to the file
     version_file_lines = readFile(version_file_name)
 
     type_of_upgrade = int(type_of_upgrade)
+
+    # step added to read merge message
+    new_lines = readFile(branch_changelog_file_name)
+    new_lines = update_branch_changelog(new_lines, change_log_update)
+    writeToFile(new_lines, branch_changelog_file_name)
 
     if type_of_upgrade == 0 :
         version_to_write = updateMajorVersion(version_file_lines)
@@ -204,6 +210,7 @@ else :
     # 3. Update the changelog with the proper formatting
     # 4. Write the update to the changelog file
     # 5. Clear the branch changelog file
+    # 6. Update the XML version
 
     changelog_file_lines = readFile(changelog_file_name)
 
@@ -214,3 +221,5 @@ else :
     writeToFile(updated_changelog_file_lines, changelog_file_name)
 
     writeToFile([], branch_changelog_file_name)
+
+    processXML(version_to_write)
