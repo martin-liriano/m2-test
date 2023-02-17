@@ -19,13 +19,13 @@ jobs:
             pthon-version: '3.9'
      - name: update major version file
        if: contains( github.event.head_commit.message, 'Major Release')
-       run: python version_update.py 0 "${{github.event.head_commit.message}}"
+       run: python ./.github/version_update.py 0 "${{github.event.head_commit.message}}"
      - name: update minor version file
        if: contains( github.event.head_commit.message, 'Minor Release')
-       run: python version_update.py 1 "${{github.event.head_commit.message}}"
+       run: python ./.github/version_update.py 1 "${{github.event.head_commit.message}}"
      - name: update patch version file
        if: contains( github.event.head_commit.message, 'Patch Release')
-       run: python version_update.py 2 "${{github.event.head_commit.message}}"
+       run: python ./.github/version_update.py 2 "${{github.event.head_commit.message}}"
      - name: Set Tag Output
        id: set-tag
        run: echo "::set-output name=tag_name::$(sh ./.github/get-version.sh)"
@@ -45,7 +45,7 @@ jobs:
        run: |
           git config --global user.name 'extend-deployer'
           git config --global user.email "martin.liriano@extend.com"
-          git add ./.github/version.txt changelog.md ./.github/branch_changelog.md
+          git add ./.github/version.txt ./etc/config.xml changelog.md ./.github/branch_changelog.md
           git commit -m "version update deployment ${{ steps.set-tag.outputs.tag_name }}"
           git push
      - name: Create release
