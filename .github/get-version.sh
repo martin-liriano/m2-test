@@ -1,2 +1,2 @@
-SUBSTRING=$(cat version.txt)
+SUBSTRING=$(cat ./.github/version.txt)
 echo v$SUBSTRING
