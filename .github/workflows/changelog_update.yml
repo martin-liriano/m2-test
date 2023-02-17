@@ -8,9 +8,11 @@ on:
       
 jobs:
   update-branch-changelog:
-    if: ${{ github.event.pull_request.merged == false }} && github.event_name != 'create' 
+    if: github.event_name != 'create' 
     runs-on: ubuntu-latest
     steps:     
+     - name: Echo
+       run: echo ${{github.even_name}}
      - name: Checkout Code
        uses: actions/checkout@v2
      - name: setup python
