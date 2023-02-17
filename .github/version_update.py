@@ -152,11 +152,11 @@ def processXML(version):
     root = tree.getroot()
 
     # find version tag and set the version to proper version
-    for version in root.iter('tag'):
-        version.text = version
+    for version_tag in root.iter('tag'):
+        version_tag.text = version
 
     # write data back to file
-    tree.write('./etc/config.xml')
+    tree.write(xml_file_name)
 
 # writeToFile(version) takes in version from update functions and writes it to the version file
 def writeToFile(contents, filename) :
