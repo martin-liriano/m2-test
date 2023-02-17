@@ -11,8 +11,6 @@ jobs:
     if: github.event_name != 'create' 
     runs-on: ubuntu-latest
     steps:     
-     - name: Echo
-       run: echo "::error ${{github.even_name}}"
      - name: Checkout Code
        uses: actions/checkout@v2
      - name: setup python
@@ -20,7 +18,7 @@ jobs:
        with:
             pthon-version: '3.9'
      - name: update changelog file
-       run: python ./.github/version_update.py 'branch' "${{github.event.head_commit.message}}"
+       run: python ./.github/version_update.py 'branch' "${{github.event_name}}"
      - name: Push changelog file
        id: push-changelog-file
        run: |
