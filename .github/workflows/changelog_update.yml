@@ -8,7 +8,7 @@ on:
       
 jobs:
   update-branch-changelog:
-    if: github.event_name != 'create'
+    if: ${{ github.event.pull_request.merged == false }} && github.event_name != 'create' 
     runs-on: ubuntu-latest
     steps:     
      - name: Checkout Code
