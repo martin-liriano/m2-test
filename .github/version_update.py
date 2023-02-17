@@ -10,16 +10,19 @@ type_of_upgrade = str(sys.argv[1])
 # fetch commit message from bash arguments
 change_log_update = str(sys.argv[2])
 
+# roo_path for hidden files
+root_path = './github/'
+
 
 # version_file_name dictates where the version file is located that serves as
 # placeholder for all versioning
-version_file_name = 'version.txt'
+version_file_name = root_path + 'version.txt'
 
 # changelog_file_name dictates where the changelog file is located
 changelog_file_name = 'changelog.md'
 
 # changelog_file_name dictates where the changelog file is located
-branch_changelog_file_name = './.github/branch_changelog.md'
+branch_changelog_file_name = root_path + 'branch_changelog.md'
 
 # xml_file_name dictates where XML file is located
 xml_file_name = './etc/config.xml'

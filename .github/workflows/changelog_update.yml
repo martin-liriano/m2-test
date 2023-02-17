@@ -9,7 +9,7 @@ on:
 jobs:
   update-branch-changelog:
     runs-on: ubuntu-latest
-    if: github.event_name != 'create'
+    if: github.event_name != 'create' || ${{ github.event.pull_request.merged == false }}
     steps:     
      - name: Checkout Code
        uses: actions/checkout@v2
@@ -25,5 +25,5 @@ jobs:
           git config --global user.name 'extend-deployer'
           git config --global user.email "martin.liriano@extend.com"
           git add ./.github/branch_changelog.md
-          git commit -m "version update deployment ${{ steps.set-tag.outputs.tag_name }}"
+          git commit -m "branch update deployment ${{ steps.set-tag.outputs.tag_name }}"
           git push
