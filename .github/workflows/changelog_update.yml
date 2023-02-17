@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:     
      - name: Echo
-       run: echo ${{github.even_name}}
+       run: echo "::error ${{github.even_name}}"
      - name: Checkout Code
        uses: actions/checkout@v2
      - name: setup python
