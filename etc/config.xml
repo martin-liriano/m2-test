@@ -2,7 +2,7 @@
     <default>
         <warranty>
             <version>
-                <tag />
+                <tag>4.0.0</tag>
             </version>
             <enableExtend>
                 <enable>0</enable>
