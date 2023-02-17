@@ -11,7 +11,7 @@ type_of_upgrade = str(sys.argv[1])
 change_log_update = str(sys.argv[2])
 
 # roo_path for hidden files
-root_path = './github/'
+root_path = './.github/'
 
 
 # version_file_name dictates where the version file is located that serves as
