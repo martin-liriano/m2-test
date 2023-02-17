@@ -1,10 +1,20 @@
 # Test Changelog
 
-## version: 2.0.0
+## version: 2.1.0
 
 ### Changelog:
 
 ---
+
+
+**2.1.0**
+
+Minor Release - Merge pull request #36 from martin-liriano/final-testbranch
+
+Updated index.html 01-01
+
+
+
 
 
 **2.0.0**
