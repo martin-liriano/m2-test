@@ -8,8 +8,8 @@ on:
       
 jobs:
   update-branch-changelog:
-    runs-on: ubuntu-latest
     if: github.event_name != 'create'
+    runs-on: ubuntu-latest
     steps:     
      - name: Checkout Code
        uses: actions/checkout@v2
