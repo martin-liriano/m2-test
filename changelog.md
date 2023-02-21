@@ -1,8 +1,19 @@
 # Extend Magento2 Changelog
 
-## version: 2.2.0
+## version: 3.0.0
 
 ### Changelog:
+
+---
+
+
+**3.0.0**
+
+Major Release - Merge pull request #37 from martin-liriano/test-branch1
+
+tested a branch updat
+
+
 
 ---
 
